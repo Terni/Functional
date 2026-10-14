@@ -1,0 +1,34 @@
+# Checks that every example loads without errors.
+# Usage: docker compose up (or: podman compose up)
+services:
+  haskell:
+    image: docker.io/library/haskell:9.6
+    volumes:
+      - ./:/src:ro
+    working_dir: /src
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+        for f in haskell/*.hs; do
+          echo "== $$f"
+          ghc -v0 -Wno-tabs -e "return ()" "$$f"
+        done
+        echo "Haskell: OK"
+
+  prolog:
+    image: docker.io/library/swipl:9.2.9
+    volumes:
+      - ./:/src:ro
+    working_dir: /src
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+        for f in prolog/*.pl; do
+          echo "== $$f"
+          swipl --on-error=status -q -g halt "$$f"
+        done
+        echo "Prolog: OK"

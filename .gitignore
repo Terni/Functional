@@ -1,0 +1,15 @@
+.ai/support-plan.md
+CLAUDE.md
+
+# Haskell
+*.hi
+*.o
+*.exe
+dist-newstyle/
+.stack-work/
+
+# Editors
+.vscode/
+.idea/
+*~
+*.swp
